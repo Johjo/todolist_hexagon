@@ -1,6 +1,5 @@
 from expression import Result
 
-from src.dependencies import Dependencies
 from src.todolist_hexagon.shared.type import TaskKey, TaskExecutionDate, TodolistKey
 from src.todolist_hexagon.todolist.aggregate import TodolistAggregate
 from src.todolist_hexagon.todolist.port import TodolistSetPort
@@ -17,8 +16,3 @@ class PostPoneTask:
 
         updater = UpdateTodolistAggregate(todolist_set=self._todolist_set)
         return updater.execute(todolist_key, update)
-
-    @classmethod
-    def factory(cls, dependencies: Dependencies) -> 'PostPoneTask':
-        todolist_set = dependencies.get_adapter(TodolistSetPort)
-        return PostPoneTask(todolist_set)

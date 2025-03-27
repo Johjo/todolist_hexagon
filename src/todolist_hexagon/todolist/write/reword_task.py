@@ -1,6 +1,5 @@
 from expression import Result
 
-from src.dependencies import Dependencies
 from src.todolist_hexagon.shared.type import TodolistKey, TaskKey, TaskName
 from src.todolist_hexagon.todolist.aggregate import TodolistAggregate
 from src.todolist_hexagon.todolist.port import TodolistSetPort
@@ -16,9 +15,3 @@ class RewordTask:
             return todolist.reword_task(task_key, new_wording)
 
         return UpdateTodolistAggregate(self._todolist_set).execute(todolist_key, update)
-
-
-
-    @classmethod
-    def factory(cls, dependencies: Dependencies) -> 'RewordTask':
-        return RewordTask(dependencies.get_adapter(TodolistSetPort))

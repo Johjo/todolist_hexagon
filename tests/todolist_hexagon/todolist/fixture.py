@@ -4,8 +4,7 @@ from expression import Option, Nothing, Some
 
 from src.todolist_hexagon.shared.type import TaskKey, TodolistKey
 from src.todolist_hexagon.todolist.aggregate import TodolistSnapshot, TaskSnapshot
-from src.todolist_hexagon.todolist.port import TodolistSetPort
-from src.todolist_hexagon.todolist.write.import_many_task import TaskKeyGeneratorPort
+from src.todolist_hexagon.todolist.port import TodolistSetPort, TaskKeyGeneratorPort
 from tests.fixture import TaskBuilder, TodolistBuilder
 
 

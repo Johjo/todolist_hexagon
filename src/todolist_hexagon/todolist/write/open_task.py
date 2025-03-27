@@ -1,6 +1,5 @@
 from expression import Result, Nothing
 
-from src.dependencies import Dependencies
 from src.todolist_hexagon.shared.type import TaskName, TaskOpen, TodolistKey, TaskKey
 from src.todolist_hexagon.todolist.aggregate import Task, TodolistAggregate
 from src.todolist_hexagon.todolist.port import TodolistSetPort
@@ -17,7 +16,3 @@ class OpenTaskUseCase:
 
         updater = UpdateTodolistAggregate(todolist_set=self._todolist_set)
         return updater.execute(todolist_key, update)
-
-    @classmethod
-    def factory(cls, dependencies: Dependencies) -> 'OpenTaskUseCase':
-        return OpenTaskUseCase(dependencies.get_adapter(TodolistSetPort))

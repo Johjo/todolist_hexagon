@@ -1,12 +1,20 @@
 from collections import OrderedDict
 
+import pytest
+
 from src.todolist_hexagon.shared.type import UserKey, TaskKey
+from src.use_case_dependencies import UseCaseDependencies
 from tests.fixture import a_task_key
 from src.todolist_hexagon.fvp.write.reset_fvp_session import ResetFvpSession
 
 
 from src.todolist_hexagon.fvp.aggregate import FvpSnapshot
+from tests.todolist_hexagon.adapter_dependencies_for_test import AdapterDependenciesForTest
 from tests.todolist_hexagon.fvp.write.fixture import FvpSessionSetForTest
+
+@pytest.fixture
+def sut(fvp_session_set: FvpSessionSetForTest):
+    return UseCaseDependencies(AdapterDependenciesForTest(fvp_session_set=fvp_session_set)).reset_fvp_session()
 
 
 def test_reset_session():

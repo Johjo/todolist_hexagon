@@ -2,11 +2,11 @@ from abc import ABC, abstractmethod
 
 from expression import Result
 
-from src.dependencies import Dependencies
 from src.todolist_hexagon.shared.type import TaskKey, TodolistKey
 from src.todolist_hexagon.todolist.aggregate import TodolistAggregate
 from src.todolist_hexagon.todolist.port import TodolistSetPort
 from src.todolist_hexagon.todolist.write.update_todolist_aggregate import UpdateTodolistAggregate
+
 
 class CloseTaskPrimaryPort(ABC):
     @abstractmethod
@@ -23,7 +23,3 @@ class CloseTaskUseCase(CloseTaskPrimaryPort):
             return todolist.close_task(task_key)
 
         return UpdateTodolistAggregate(self._todolist_set).execute(todolist_key, update)
-
-    @classmethod
-    def factory(cls, dependencies: Dependencies) -> 'CloseTaskUseCase':
-        return CloseTaskUseCase(dependencies.get_adapter(TodolistSetPort))

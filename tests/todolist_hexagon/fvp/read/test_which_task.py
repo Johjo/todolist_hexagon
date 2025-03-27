@@ -3,8 +3,10 @@ from uuid import UUID, uuid4
 
 import pytest
 from faker import Faker
+from typing_extensions import Protocol
 
-from src.todolist_hexagon.fvp.aggregate import Task, DoTheTask, ChooseTheTask, FvpSnapshot, NothingToDo
+from src.todolist_hexagon.fvp.aggregate import Task, DoTheTask, ChooseTheTask, FvpSnapshot, NothingToDo, \
+    FvpSessionSetPort
 from src.todolist_hexagon.fvp.read.which_task import TodolistPort, WhichTaskFilter, WhichTaskQuery
 from src.todolist_hexagon.shared.type import UserKey, TaskKey, TodolistKey
 from tests.todolist_hexagon.fvp.write.fixture import FvpSessionSetForTest
@@ -23,9 +25,38 @@ class TodolistForTest(TodolistPort):
         self._tasksByFilter[user_key, task_filter] = [task for task in tasks]
 
 
+class QueryAdapterDependenciesPort(Protocol):
+    def todolist(self) -> TodolistPort: ...
+
+    def fvp_session_set(self) -> FvpSessionSetPort: ...
+
+
+class QueryDependencies:
+    def __init__(self, adapter_dependencies: QueryAdapterDependenciesPort):
+        self._adapter_dependencies = adapter_dependencies
+
+    def which_task(self):
+        return WhichTaskQuery(todolist=self._adapter_dependencies.todolist(),
+                              fvp_sessions_set=self._adapter_dependencies.fvp_session_set())
+
+
+class AdapterDependenciesForTest:
+    def __init__(self, fvp_session_set: FvpSessionSetPort | None = None, todolist_set: TodolistPort | None = None):
+        self._fvp_session = fvp_session_set
+        self._todolist = todolist_set
+
+    def todolist(self) -> TodolistPort:
+        return self._todolist
+
+    def fvp_session_set(self) -> FvpSessionSetPort:
+        return self._fvp_session
+
+
 @pytest.fixture
 def sut(fvp_session_set: FvpSessionSetForTest, todolist_name: TodolistForTest):
-    return WhichTaskQuery(todolist_name, fvp_session_set)
+    return QueryDependencies(
+        AdapterDependenciesForTest(fvp_session_set=fvp_session_set, todolist_set=todolist_name)).which_task()
+
 
 
 @pytest.fixture

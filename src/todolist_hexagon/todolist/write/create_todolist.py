@@ -1,6 +1,5 @@
 from expression import Result, Nothing, Error, Ok
 
-from src.dependencies import Dependencies
 from src.todolist_hexagon.shared.type import TodolistName, TodolistKey
 from src.todolist_hexagon.todolist.aggregate import TodolistAggregate
 from src.todolist_hexagon.todolist.port import TodolistSetPort
@@ -16,7 +15,3 @@ class TodolistCreate:
 
         self._todolist_set.save_snapshot(TodolistAggregate.create(todolist_key=todolist_key, todolist_name=todolist_name).to_snapshot())
         return Ok(None)
-
-    @classmethod
-    def factory(cls, dependencies: Dependencies) -> 'TodolistCreate':
-        return TodolistCreate(dependencies.get_adapter(TodolistSetPort))

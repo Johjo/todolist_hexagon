@@ -5,11 +5,10 @@ from uuid import UUID
 
 from expression import Option, Nothing
 
-from src.dependencies import Dependencies
+
 from src.todolist_hexagon.fvp.aggregate import Task, FinalVersionPerfectedSession, NothingToDo, DoTheTask, ChooseTheTask, \
     FvpSessionSetPort
 from src.todolist_hexagon.shared.type import UserKey, TodolistKey
-from src.shared.filter import TextFilter
 
 
 @dataclass(frozen=True, eq=True)
@@ -47,7 +46,32 @@ class WhichTaskQuery:
         snapshot = self._fvp_sessions_set.by(user_key=user_key)
         return FinalVersionPerfectedSession.from_snapshot(snapshot)
 
-    @classmethod
-    def factory(cls, dependencies: Dependencies) -> 'WhichTaskQuery':
-        return WhichTaskQuery(dependencies.get_adapter(TodolistPort), dependencies.get_adapter(FvpSessionSetPort))
 
+class TextFilter:
+    def __init__(self, included_words: tuple[str, ...], excluded_words: tuple[str, ...]):
+        self._included_words = included_words
+        self._excluded_words = excluded_words
+
+    def include(self, text: str) -> bool:
+        if not self.match_included_words(text):
+            return False
+
+        if self.match_excluded_words(text):
+            return False
+
+        return True
+
+    def match_included_words(self, text: str) -> bool:
+        if self._included_words == ():
+            return True
+
+        for included_word in self._included_words:
+            if any(included_word == word for word in text.split()):
+                return True
+        return False
+
+    def match_excluded_words(self, text: str) -> bool:
+        for excluded_word in self._excluded_words:
+            if any(excluded_word == word for word in text.split()):
+                return True
+        return False

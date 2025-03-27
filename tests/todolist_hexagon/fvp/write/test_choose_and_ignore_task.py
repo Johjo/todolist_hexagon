@@ -2,10 +2,11 @@ from typing import OrderedDict
 
 import pytest
 
-from src.todolist_hexagon.shared.type import TaskKey, UserKey
-from tests.fixture import a_task_key
 from src.todolist_hexagon.fvp.aggregate import FvpSnapshot
-from src.todolist_hexagon.fvp.write.choose_and_ignore_task import ChooseAndIgnoreTaskFvp
+from src.todolist_hexagon.shared.type import TaskKey, UserKey
+from src.use_case_dependencies import UseCaseDependencies
+from tests.fixture import a_task_key
+from tests.todolist_hexagon.adapter_dependencies_for_test import AdapterDependenciesForTest
 from tests.todolist_hexagon.fvp.write.fixture import FvpSessionSetForTest
 
 
@@ -16,7 +17,8 @@ def fvp_sessions_set():
 
 @pytest.fixture
 def sut(fvp_sessions_set):
-    return ChooseAndIgnoreTaskFvp(fvp_sessions_set)
+    return UseCaseDependencies(AdapterDependenciesForTest(fvp_session_set=fvp_sessions_set)).choose_and_ignore_task()
+
 
 
 def test_should_choose_and_ignore_when_no_task_already_chosen(sut, fvp_sessions_set):

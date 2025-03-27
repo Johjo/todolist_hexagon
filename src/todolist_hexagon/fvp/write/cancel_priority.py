@@ -1,4 +1,3 @@
-from src.dependencies import Dependencies
 from src.todolist_hexagon.fvp.aggregate import FinalVersionPerfectedSession, FvpSessionSetPort
 from src.todolist_hexagon.shared.type import TaskKey, UserKey
 
@@ -14,6 +13,3 @@ class CancelPriority:
 
         self._session_set.save(user_key=user_key, snapshot=session.to_snapshot())
 
-    @classmethod
-    def factory(cls, dependencies: Dependencies) -> 'CancelPriority':
-        return CancelPriority(dependencies.get_adapter(FvpSessionSetPort))

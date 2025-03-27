@@ -5,9 +5,7 @@ from src.todolist_hexagon.todolist.write.import_many_task import ImportManyTask,
 from src.use_case_dependencies import UseCaseDependencies
 from tests.fixture import TodolistFaker, TaskBuilder
 from tests.todolist_hexagon.todolist.fixture import TaskKeyGeneratorForTest, TodolistSetForTest
-from tests.todolist_hexagon.todolist.write.adapter_dependencies_for_test import AdapterDependenciesDummy, \
-    AdapterDependenciesForTest
-
+from tests.todolist_hexagon.adapter_dependencies_for_test import AdapterDependenciesForTest
 
 @pytest.fixture
 def task_key_generator() -> TaskKeyGeneratorForTest:

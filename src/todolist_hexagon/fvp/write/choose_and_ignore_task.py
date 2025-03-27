@@ -1,4 +1,3 @@
-from src.dependencies import Dependencies
 from src.todolist_hexagon.fvp.aggregate import FinalVersionPerfectedSession, FvpSessionSetPort
 from src.todolist_hexagon.shared.type import TaskKey, UserKey
 
@@ -26,6 +25,3 @@ class ChooseAndIgnoreTaskFvp:
             raise NotImplementedError()
         return session
 
-    @classmethod
-    def factory(cls, dependencies : Dependencies) -> 'ChooseAndIgnoreTaskFvp':
-        return ChooseAndIgnoreTaskFvp(set_of_fvp_sessions=dependencies.get_adapter(FvpSessionSetPort))
