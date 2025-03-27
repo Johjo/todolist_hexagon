@@ -1,1 +1,0 @@
-USER_KEY="user_key"
