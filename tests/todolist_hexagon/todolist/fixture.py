@@ -15,7 +15,7 @@ class TodolistSetForTest(TodolistSetPort):
 
     def by(self, todolist_key: TodolistKey) -> Option[TodolistSnapshot]:
         if todolist_key not in self._all_snapshot:
-            return Nothing
+            raise Exception(f"todolist {todolist_key} not found")
         return self._all_snapshot[todolist_key]
 
     def save_snapshot(self, todolist: TodolistSnapshot) -> None:
@@ -28,7 +28,7 @@ class TodolistSetForTest(TodolistSetPort):
         self._all_snapshot[TodolistKey(todolist_key)] = Nothing
 
     def delete(self, todolist_key):
-        del self._all_snapshot[todolist_key]
+        self._all_snapshot[todolist_key] = Nothing
 
 
 class TaskKeyGeneratorForTest(TaskKeyGeneratorPort):

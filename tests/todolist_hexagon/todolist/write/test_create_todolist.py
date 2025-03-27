@@ -2,16 +2,20 @@ import pytest
 from expression import Ok, Error
 
 from src.todolist_hexagon.todolist.write.create_todolist import TodolistCreate
+from src.use_case_dependencies import UseCaseDependencies
 from tests.fixture import TodolistFaker
 from tests.todolist_hexagon.todolist.fixture import TodolistSetForTest
+from tests.todolist_hexagon.todolist.write.adapter_dependencies_for_test import AdapterDependenciesForTest
+
 
 @pytest.fixture
 def todolist_set() -> TodolistSetForTest:
     return TodolistSetForTest()
 
+
 @pytest.fixture
 def sut(todolist_set: TodolistSetForTest) -> TodolistCreate:
-    return TodolistCreate(todolist_set)
+    return UseCaseDependencies(AdapterDependenciesForTest(todolist_set)).create_todolist()
 
 
 def test_create_todolist(sut: TodolistCreate, todolist_set: TodolistSetForTest, fake: TodolistFaker) -> None:

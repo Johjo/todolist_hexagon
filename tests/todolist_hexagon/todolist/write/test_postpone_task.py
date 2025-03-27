@@ -3,16 +3,17 @@ from datetime import datetime
 import pytest
 from expression import Ok, Error, Some
 
-from src.todolist_hexagon.shared.event import TaskPostponedEvent
-from src.todolist_hexagon.shared.type import TaskExecutionDate, TaskKey
+from src.todolist_hexagon.shared.type import TaskExecutionDate
 from src.todolist_hexagon.todolist.write.postpone_task import PostPoneTask
+from src.use_case_dependencies import UseCaseDependencies
 from tests.fixture import TodolistFaker
 from tests.todolist_hexagon.todolist.fixture import TodolistSetForTest
+from tests.todolist_hexagon.todolist.write.adapter_dependencies_for_test import AdapterDependenciesForTest
 
 
 @pytest.fixture
 def sut(todolist_set: TodolistSetForTest) -> PostPoneTask:
-    return PostPoneTask(todolist_set)
+    return UseCaseDependencies(AdapterDependenciesForTest(todolist_set=todolist_set)).postpone_task()
 
 
 def test_save_postponed_task(sut: PostPoneTask, todolist_set: TodolistSetForTest, fake: TodolistFaker):

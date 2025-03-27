@@ -1,7 +1,7 @@
 from expression import Result, pipe
 
 from src.todolist_hexagon.shared.event import Event
-from src.todolist_hexagon.shared.type import TodolistName
+from src.todolist_hexagon.shared.type import TodolistName, TodolistKey
 from src.todolist_hexagon.todolist.aggregate import TodolistAggregate, TodolistSnapshot
 from src.todolist_hexagon.todolist.port import TodolistSetPort
 
@@ -10,8 +10,8 @@ class TodolistRepository:
     def __init__(self, todolist_set: TodolistSetPort):
         self._todolist_set = todolist_set
 
-    def load_todolist(self, todolist_name: TodolistName) -> Result[TodolistAggregate, str]:
-        return pipe(todolist_name, self._load_snapshot, self._from_snapshot)
+    def load_todolist(self, todolist_key: TodolistKey) -> Result[TodolistAggregate, str]:
+        return pipe(todolist_key, self._load_snapshot, self._from_snapshot)
 
     def save_todolist(self, aggregate: Result[TodolistAggregate, str]) -> Result[tuple[Event, ...], str]:
         return pipe(aggregate,
@@ -23,8 +23,8 @@ class TodolistRepository:
     def _from_snapshot(snapshot: Result[TodolistSnapshot, str]) -> Result[TodolistAggregate, str]:
         return snapshot.map(TodolistAggregate.from_snapshot)
 
-    def _load_snapshot(self, todolist_name: TodolistName) -> Result[TodolistSnapshot, str]:
-        return self._todolist_set.by(todolist_name).to_result(error="todolist not found")
+    def _load_snapshot(self, todolist_key: TodolistKey) -> Result[TodolistSnapshot, str]:
+        return self._todolist_set.by(todolist_key).to_result(error="todolist not found")
 
     def _save_snapshot(self, todolist: Result[TodolistAggregate, str]) -> Result[TodolistAggregate, str]:
         return (todolist

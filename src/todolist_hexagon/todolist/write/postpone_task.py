@@ -1,10 +1,9 @@
-from expression import Result, pipe
+from expression import Result
 
 from src.dependencies import Dependencies
-from src.todolist_hexagon.shared.type import TodolistName, TaskKey, TaskExecutionDate, TodolistKey
+from src.todolist_hexagon.shared.type import TaskKey, TaskExecutionDate, TodolistKey
 from src.todolist_hexagon.todolist.aggregate import TodolistAggregate
 from src.todolist_hexagon.todolist.port import TodolistSetPort
-from src.todolist_hexagon.todolist.todolist_repository import TodolistRepository
 from src.todolist_hexagon.todolist.write.update_todolist_aggregate import UpdateTodolistAggregate
 
 

@@ -1,9 +1,12 @@
 import pytest
-from expression import Ok, Error, Nothing
+from expression import Ok, Error
 
 from src.todolist_hexagon.todolist.write.import_many_task import ImportManyTask, ExternalTodoListPort, TaskImported
+from src.use_case_dependencies import UseCaseDependencies
 from tests.fixture import TodolistFaker, TaskBuilder
 from tests.todolist_hexagon.todolist.fixture import TaskKeyGeneratorForTest, TodolistSetForTest
+from tests.todolist_hexagon.todolist.write.adapter_dependencies_for_test import AdapterDependenciesDummy, \
+    AdapterDependenciesForTest
 
 
 @pytest.fixture
@@ -13,7 +16,7 @@ def task_key_generator() -> TaskKeyGeneratorForTest:
 
 @pytest.fixture
 def sut(todolist_set: TodolistSetForTest, task_key_generator: TaskKeyGeneratorForTest) -> ImportManyTask:
-    return ImportManyTask(todolist_set, task_key_generator)
+    return UseCaseDependencies(AdapterDependenciesForTest(todolist_set, task_key_generator)).import_many_task()
 
 
 class ExternalTodolistForTest(ExternalTodoListPort):
@@ -89,10 +92,10 @@ def test_tell_error_when_todolist_doest_not_exist(sut: ImportManyTask, todolist_
                                                   external_todolist: ExternalTodolistForTest, fake: TodolistFaker):
     # GIVEN
     unknown_todolist = fake.a_todolist()
-    todolist_set.feed_nothing(unknown_todolist.to_name())
+    todolist_set.feed_nothing(unknown_todolist.to_key())
 
     # WHEN
-    response = sut.execute(unknown_todolist.to_name(), external_todolist)
+    response = sut.execute(unknown_todolist.to_key(), external_todolist)
 
     # THEN
     assert response == Error("todolist not found")

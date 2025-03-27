@@ -1,21 +1,11 @@
-from typing import Any
-
 import pytest
-from expression import Nothing, Ok, Result
+from expression import Nothing, Ok
 
-from src.todolist_hexagon.shared.type import TodolistKey
-from src.todolist_hexagon.todolist.port import TodolistSetPort
+from src.todolist_hexagon.todolist.write.todolist_delete import TodolistDelete
+from src.use_case_dependencies import UseCaseDependencies
 from tests.fixture import TodolistFaker
 from tests.todolist_hexagon.todolist.fixture import TodolistSetForTest
-
-
-class TodolistDelete:
-    def __init__(self, todolist_set: TodolistSetPort) -> None:
-        self._todolist_set = todolist_set
-
-    def execute(self, todolist_key: TodolistKey) -> Result[None, None]:
-        self._todolist_set.delete(todolist_key=todolist_key)
-        return Ok(None)
+from tests.todolist_hexagon.todolist.write.adapter_dependencies_for_test import AdapterDependenciesForTest
 
 
 @pytest.fixture
@@ -25,7 +15,8 @@ def todolist_set() -> TodolistSetForTest:
 
 @pytest.fixture
 def sut(todolist_set: TodolistSetForTest) -> TodolistDelete:
-    return TodolistDelete(todolist_set)
+    return UseCaseDependencies(AdapterDependenciesForTest(todolist_set)).delete_todolist()
+
 
 
 def test_delete_todolist(sut: TodolistDelete, todolist_set: TodolistSetForTest, fake: TodolistFaker) -> None:

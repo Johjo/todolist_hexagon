@@ -1,7 +1,7 @@
 from dataclasses import dataclass, field, replace
 from enum import Enum
-from math import factorial
 from typing import Any
+
 
 class ResourceType(str, Enum):
     use_case = "use_case"
@@ -72,3 +72,5 @@ class Dependencies:
             return f"{resource_name}: {resource_type} => {str(type(resource))}"
 
         return "\n".join([format_item(key) for key in self.factory.keys()])
+
+

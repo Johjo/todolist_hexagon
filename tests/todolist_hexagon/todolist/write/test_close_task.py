@@ -4,13 +4,15 @@ import pytest
 from expression import Ok, Error
 
 from src.todolist_hexagon.todolist.write.close_task import CloseTaskUseCase
+from src.use_case_dependencies import UseCaseDependencies
 from tests.fixture import TodolistFaker
 from tests.todolist_hexagon.todolist.fixture import TodolistSetForTest
+from tests.todolist_hexagon.todolist.write.adapter_dependencies_for_test import AdapterDependenciesForTest
 
 
 @pytest.fixture
 def sut(todolist_set: TodolistSetForTest):
-    return CloseTaskUseCase(todolist_set)
+    return UseCaseDependencies(AdapterDependenciesForTest(todolist_set)).close_task()
 
 
 def test_close_task(sut: CloseTaskUseCase, todolist_set: TodolistSetForTest, fake: TodolistFaker):

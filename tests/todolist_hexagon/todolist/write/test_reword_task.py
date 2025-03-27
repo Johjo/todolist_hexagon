@@ -5,13 +5,15 @@ from expression import Ok, Error
 
 from src.todolist_hexagon.shared.type import TaskName
 from src.todolist_hexagon.todolist.write.reword_task import RewordTask
+from src.use_case_dependencies import UseCaseDependencies
 from tests.fixture import TodolistFaker
 from tests.todolist_hexagon.todolist.fixture import TodolistSetForTest
+from tests.todolist_hexagon.todolist.write.adapter_dependencies_for_test import AdapterDependenciesForTest
 
 
 @pytest.fixture
 def sut(todolist_set: TodolistSetForTest):
-    return RewordTask(todolist_set)
+    return UseCaseDependencies(AdapterDependenciesForTest(todolist_set=todolist_set)).reword_task()
 
 
 def test_reword_task(sut: RewordTask, todolist_set: TodolistSetForTest, fake: TodolistFaker):
@@ -31,7 +33,7 @@ def test_reword_when_two_task(sut: RewordTask, todolist_set: TodolistSetForTest,
     todolist = fake.a_todolist().having(tasks=[first_task, reworded_task])
     todolist_set.feed(todolist)
 
-    sut.execute(todolist_key=todolist.to_key(), task_key=reworded_task.key, new_wording=TaskName("buy the milk"))
+    sut.execute(todolist_key=todolist.to_key(), task_key=reworded_task.to_key(), new_wording=TaskName("buy the milk"))
 
     actual = todolist_set.by(todolist_key=todolist.to_key()).value
     assert actual == todolist.having(tasks=[first_task, (replace(reworded_task, name="buy the milk"))]).to_snapshot()

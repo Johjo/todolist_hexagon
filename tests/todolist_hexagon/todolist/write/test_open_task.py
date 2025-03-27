@@ -1,9 +1,12 @@
 import pytest
 from expression import Ok, Error
+
+from src.use_case_dependencies import UseCaseDependencies
 from tests.fixture import TodolistFaker
 from tests.todolist_hexagon.todolist.fixture import TaskKeyGeneratorForTest, TodolistSetForTest
 
 from src.todolist_hexagon.todolist.write.open_task import OpenTaskUseCase
+from tests.todolist_hexagon.todolist.write.adapter_dependencies_for_test import AdapterDependenciesForTest
 
 
 @pytest.fixture
@@ -13,7 +16,7 @@ def task_key_generator() -> TaskKeyGeneratorForTest:
 
 @pytest.fixture
 def sut(todolist_set: TodolistSetForTest, task_key_generator: TaskKeyGeneratorForTest) -> OpenTaskUseCase:
-    return OpenTaskUseCase(todolist_set)
+    return UseCaseDependencies(AdapterDependenciesForTest(todolist_set=todolist_set, task_key_generator=task_key_generator)).open_task()
 
 
 def test_open_task_when_no_task(sut: OpenTaskUseCase, todolist_set: TodolistSetForTest,
