@@ -5,7 +5,7 @@ from expression import Ok, Error
 
 from todolist_hexagon.todolist.write.close_task import CloseTaskUseCase
 from use_case_dependencies import UseCaseDependencies
-from tests.fixture import TodolistFaker
+from todolist_hexagon.builder import TodolistFaker
 from tests.todolist_hexagon.todolist.fixture import TodolistSetForTest
 from tests.todolist_hexagon.adapter_dependencies_for_test import AdapterDependenciesForTest
 

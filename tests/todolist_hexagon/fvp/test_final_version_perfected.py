@@ -4,7 +4,7 @@ import pytest
 
 from todolist_hexagon.fvp.aggregate import Task, NothingToDo, DoTheTask, ChooseTheTask, FinalVersionPerfectedSession, \
     FvpSnapshot
-from tests.fixture import a_task_key
+from todolist_hexagon.builder import a_task_key
 
 
 @pytest.fixture

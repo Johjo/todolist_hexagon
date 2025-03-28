@@ -2,7 +2,7 @@ import pytest
 from expression import Ok, Error
 
 from use_case_dependencies import UseCaseDependencies
-from tests.fixture import TodolistFaker
+from todolist_hexagon.builder import TodolistFaker
 from tests.todolist_hexagon.todolist.fixture import TaskKeyGeneratorForTest, TodolistSetForTest
 
 from todolist_hexagon.todolist.write.open_task import OpenTaskUseCase

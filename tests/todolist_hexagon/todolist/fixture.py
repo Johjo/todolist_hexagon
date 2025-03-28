@@ -2,10 +2,10 @@ from uuid import UUID
 
 from expression import Option, Nothing, Some
 
+from todolist_hexagon.builder import TodolistBuilder, TaskBuilder
 from todolist_hexagon.shared.type import TaskKey, TodolistKey
 from todolist_hexagon.todolist.aggregate import TodolistSnapshot, TaskSnapshot
 from todolist_hexagon.todolist.port import TodolistSetPort, TaskKeyGeneratorPort
-from tests.fixture import TaskBuilder, TodolistBuilder
 
 
 class TodolistSetForTest(TodolistSetPort):

@@ -6,7 +6,7 @@ from expression import Ok, Error, Some
 from todolist_hexagon.shared.type import TaskExecutionDate
 from todolist_hexagon.todolist.write.postpone_task import PostPoneTask
 from use_case_dependencies import UseCaseDependencies
-from tests.fixture import TodolistFaker
+from todolist_hexagon.builder import TodolistFaker
 from tests.todolist_hexagon.todolist.fixture import TodolistSetForTest
 from tests.todolist_hexagon.adapter_dependencies_for_test import AdapterDependenciesForTest
 
