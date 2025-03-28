@@ -1,7 +1,7 @@
 import pytest
 from expression import Ok, Error
 
-from src.use_case_dependencies import UseCaseDependencies
+from use_case_dependencies import UseCaseDependencies
 from tests.fixture import TodolistFaker
 from tests.todolist_hexagon.todolist.fixture import TaskKeyGeneratorForTest, TodolistSetForTest
 

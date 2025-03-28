@@ -46,9 +46,13 @@ class AdapterDependenciesForTest:
         self._todolist = todolist_set
 
     def todolist(self) -> TodolistPort:
+        if self._todolist is None:
+            raise Exception("todolist not defined")
         return self._todolist
 
     def fvp_session_set(self) -> FvpSessionSetPort:
+        if self._fvp_session is None:
+            raise Exception("fvp session not defined")
         return self._fvp_session
 
 

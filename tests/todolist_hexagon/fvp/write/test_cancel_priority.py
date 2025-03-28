@@ -3,7 +3,7 @@ import pytest
 from todolist_hexagon.fvp.aggregate import FvpSnapshot
 from todolist_hexagon.fvp.write.cancel_priority import CancelPriority
 from todolist_hexagon.shared.type import UserKey
-from src.use_case_dependencies import UseCaseDependencies
+from use_case_dependencies import UseCaseDependencies
 from tests.fixture import a_task_key
 from tests.todolist_hexagon.adapter_dependencies_for_test import AdapterDependenciesForTest
 from tests.todolist_hexagon.fvp.write.fixture import FvpSessionSetForTest
