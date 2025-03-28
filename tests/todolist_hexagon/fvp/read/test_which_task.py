@@ -3,11 +3,11 @@ from uuid import UUID, uuid4
 
 import pytest
 from faker import Faker
-from typing_extensions import Protocol
 
 from todolist_hexagon.fvp.aggregate import Task, DoTheTask, ChooseTheTask, FvpSnapshot, NothingToDo, \
     FvpSessionSetPort
 from todolist_hexagon.fvp.read.which_task import TodolistPort, WhichTaskFilter, WhichTaskQuery
+from todolist_hexagon.query_dependencies import QueryAdapterDependenciesPort
 from todolist_hexagon.shared.type import UserKey, TaskKey, TodolistKey
 from tests.todolist_hexagon.fvp.write.fixture import FvpSessionSetForTest
 
@@ -23,12 +23,6 @@ class TodolistForTest(TodolistPort):
 
     def feed(self, user_key: UserKey, task_filter: WhichTaskFilter, *tasks: Task):
         self._tasksByFilter[user_key, task_filter] = [task for task in tasks]
-
-
-class QueryAdapterDependenciesPort(Protocol):
-    def todolist(self) -> TodolistPort: ...
-
-    def fvp_session_set(self) -> FvpSessionSetPort: ...
 
 
 class QueryDependencies:
