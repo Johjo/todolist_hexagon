@@ -3,8 +3,8 @@ from datetime import datetime
 import pytest
 from expression import Ok, Error, Some
 
-from src.todolist_hexagon.shared.type import TaskExecutionDate
-from src.todolist_hexagon.todolist.write.postpone_task import PostPoneTask
+from todolist_hexagon.shared.type import TaskExecutionDate
+from todolist_hexagon.todolist.write.postpone_task import PostPoneTask
 from src.use_case_dependencies import UseCaseDependencies
 from tests.fixture import TodolistFaker
 from tests.todolist_hexagon.todolist.fixture import TodolistSetForTest

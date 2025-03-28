@@ -3,8 +3,8 @@ from dataclasses import replace
 import pytest
 from expression import Ok, Error
 
-from src.todolist_hexagon.shared.type import TaskName
-from src.todolist_hexagon.todolist.write.reword_task import RewordTask
+from todolist_hexagon.shared.type import TaskName
+from todolist_hexagon.todolist.write.reword_task import RewordTask
 from src.use_case_dependencies import UseCaseDependencies
 from tests.fixture import TodolistFaker
 from tests.todolist_hexagon.todolist.fixture import TodolistSetForTest

@@ -1,9 +1,9 @@
 from expression import Result, pipe
 
-from src.todolist_hexagon.shared.event import Event
-from src.todolist_hexagon.shared.type import TodolistName, TodolistKey
-from src.todolist_hexagon.todolist.aggregate import TodolistAggregate, TodolistSnapshot
-from src.todolist_hexagon.todolist.port import TodolistSetPort
+from todolist_hexagon.shared.event import Event
+from todolist_hexagon.shared.type import TodolistName, TodolistKey
+from todolist_hexagon.todolist.aggregate import TodolistAggregate, TodolistSnapshot
+from todolist_hexagon.todolist.port import TodolistSetPort
 
 
 class TodolistRepository:

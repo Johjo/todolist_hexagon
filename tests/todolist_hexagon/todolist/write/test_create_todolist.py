@@ -1,7 +1,7 @@
 import pytest
 from expression import Ok, Error
 
-from src.todolist_hexagon.todolist.write.create_todolist import TodolistCreate
+from todolist_hexagon.todolist.write.create_todolist import TodolistCreate
 from src.use_case_dependencies import UseCaseDependencies
 from tests.fixture import TodolistFaker
 from tests.todolist_hexagon.todolist.fixture import TodolistSetForTest

@@ -1,7 +1,7 @@
 from collections import OrderedDict
 
-from src.todolist_hexagon.fvp.aggregate import FvpSnapshot, FvpSessionSetPort
-from src.todolist_hexagon.shared.type import UserKey
+from todolist_hexagon.fvp.aggregate import FvpSnapshot, FvpSessionSetPort
+from todolist_hexagon.shared.type import UserKey
 
 
 class ResetFvpSession:

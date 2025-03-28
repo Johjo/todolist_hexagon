@@ -3,10 +3,10 @@ from dataclasses import dataclass
 
 from expression import Result, Option
 
-from src.todolist_hexagon.shared.type import TaskKey, TaskName, TaskOpen, TaskExecutionDate, TodolistKey
-from src.todolist_hexagon.todolist.aggregate import TodolistAggregate, TaskSnapshot
-from src.todolist_hexagon.todolist.port import TodolistSetPort, TaskKeyGeneratorPort
-from src.todolist_hexagon.todolist.write.update_todolist_aggregate import UpdateTodolistAggregate
+from todolist_hexagon.shared.type import TaskKey, TaskName, TaskOpen, TaskExecutionDate, TodolistKey
+from todolist_hexagon.todolist.aggregate import TodolistAggregate, TaskSnapshot
+from todolist_hexagon.todolist.port import TodolistSetPort, TaskKeyGeneratorPort
+from todolist_hexagon.todolist.write.update_todolist_aggregate import UpdateTodolistAggregate
 
 
 @dataclass(frozen=True)

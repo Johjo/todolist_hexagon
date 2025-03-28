@@ -2,9 +2,9 @@ from uuid import UUID
 
 from expression import Option, Nothing, Some
 
-from src.todolist_hexagon.shared.type import TaskKey, TodolistKey
-from src.todolist_hexagon.todolist.aggregate import TodolistSnapshot, TaskSnapshot
-from src.todolist_hexagon.todolist.port import TodolistSetPort, TaskKeyGeneratorPort
+from todolist_hexagon.shared.type import TaskKey, TodolistKey
+from todolist_hexagon.todolist.aggregate import TodolistSnapshot, TaskSnapshot
+from todolist_hexagon.todolist.port import TodolistSetPort, TaskKeyGeneratorPort
 from tests.fixture import TaskBuilder, TodolistBuilder
 
 

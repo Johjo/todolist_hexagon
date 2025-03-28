@@ -5,7 +5,7 @@ from src.use_case_dependencies import UseCaseDependencies
 from tests.fixture import TodolistFaker
 from tests.todolist_hexagon.todolist.fixture import TaskKeyGeneratorForTest, TodolistSetForTest
 
-from src.todolist_hexagon.todolist.write.open_task import OpenTaskUseCase
+from todolist_hexagon.todolist.write.open_task import OpenTaskUseCase
 from tests.todolist_hexagon.adapter_dependencies_for_test import AdapterDependenciesForTest
 
 

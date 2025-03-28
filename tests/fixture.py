@@ -6,8 +6,8 @@ from uuid import UUID, uuid4
 from expression import Option, Nothing, Some
 from faker import Faker
 
-from src.todolist_hexagon.shared.type import TaskKey, TaskName, TodolistName, TaskOpen, TaskExecutionDate, TodolistKey
-from src.todolist_hexagon.todolist.aggregate import TaskSnapshot, TodolistSnapshot
+from todolist_hexagon.shared.type import TaskKey, TaskName, TodolistName, TaskOpen, TaskExecutionDate, TodolistKey
+from todolist_hexagon.todolist.aggregate import TaskSnapshot, TodolistSnapshot
 
 
 def a_task_key(index: TaskKey | UUID | int | None = None) -> TaskKey:

@@ -2,10 +2,10 @@ from abc import ABC, abstractmethod
 
 from expression import Result
 
-from src.todolist_hexagon.shared.type import TaskKey, TodolistKey
-from src.todolist_hexagon.todolist.aggregate import TodolistAggregate
-from src.todolist_hexagon.todolist.port import TodolistSetPort
-from src.todolist_hexagon.todolist.write.update_todolist_aggregate import UpdateTodolistAggregate
+from todolist_hexagon.shared.type import TaskKey, TodolistKey
+from todolist_hexagon.todolist.aggregate import TodolistAggregate
+from todolist_hexagon.todolist.port import TodolistSetPort
+from todolist_hexagon.todolist.write.update_todolist_aggregate import UpdateTodolistAggregate
 
 
 class CloseTaskPrimaryPort(ABC):

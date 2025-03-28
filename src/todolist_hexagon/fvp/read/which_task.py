@@ -6,9 +6,9 @@ from uuid import UUID
 from expression import Option, Nothing
 
 
-from src.todolist_hexagon.fvp.aggregate import Task, FinalVersionPerfectedSession, NothingToDo, DoTheTask, ChooseTheTask, \
+from todolist_hexagon.fvp.aggregate import Task, FinalVersionPerfectedSession, NothingToDo, DoTheTask, ChooseTheTask, \
     FvpSessionSetPort
-from src.todolist_hexagon.shared.type import UserKey, TodolistKey
+from todolist_hexagon.shared.type import UserKey, TodolistKey
 
 
 @dataclass(frozen=True, eq=True)

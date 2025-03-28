@@ -1,17 +1,17 @@
 from typing import Protocol
 
-from src.todolist_hexagon.fvp.aggregate import FvpSessionSetPort
-from src.todolist_hexagon.fvp.write.cancel_priority import CancelPriority
-from src.todolist_hexagon.fvp.write.choose_and_ignore_task import ChooseAndIgnoreTaskFvp
-from src.todolist_hexagon.fvp.write.reset_fvp_session import ResetFvpSession
-from src.todolist_hexagon.todolist.port import TodolistSetPort, TaskKeyGeneratorPort
-from src.todolist_hexagon.todolist.write.close_task import CloseTaskPrimaryPort, CloseTaskUseCase
-from src.todolist_hexagon.todolist.write.create_todolist import TodolistCreate
-from src.todolist_hexagon.todolist.write.import_many_task import ImportManyTask
-from src.todolist_hexagon.todolist.write.open_task import OpenTaskUseCase
-from src.todolist_hexagon.todolist.write.postpone_task import PostPoneTask
-from src.todolist_hexagon.todolist.write.reword_task import RewordTask
-from src.todolist_hexagon.todolist.write.todolist_delete import TodolistDelete
+from todolist_hexagon.fvp.aggregate import FvpSessionSetPort
+from todolist_hexagon.fvp.write.cancel_priority import CancelPriority
+from todolist_hexagon.fvp.write.choose_and_ignore_task import ChooseAndIgnoreTaskFvp
+from todolist_hexagon.fvp.write.reset_fvp_session import ResetFvpSession
+from todolist_hexagon.todolist.port import TodolistSetPort, TaskKeyGeneratorPort
+from todolist_hexagon.todolist.write.close_task import CloseTaskPrimaryPort, CloseTaskUseCase
+from todolist_hexagon.todolist.write.create_todolist import TodolistCreate
+from todolist_hexagon.todolist.write.import_many_task import ImportManyTask
+from todolist_hexagon.todolist.write.open_task import OpenTaskUseCase
+from todolist_hexagon.todolist.write.postpone_task import PostPoneTask
+from todolist_hexagon.todolist.write.reword_task import RewordTask
+from todolist_hexagon.todolist.write.todolist_delete import TodolistDelete
 
 
 class AdapterDependenciesPort(Protocol):

@@ -2,7 +2,7 @@ from collections import OrderedDict
 
 import pytest
 
-from src.todolist_hexagon.fvp.aggregate import Task, NothingToDo, DoTheTask, ChooseTheTask, FinalVersionPerfectedSession, \
+from todolist_hexagon.fvp.aggregate import Task, NothingToDo, DoTheTask, ChooseTheTask, FinalVersionPerfectedSession, \
     FvpSnapshot
 from tests.fixture import a_task_key
 

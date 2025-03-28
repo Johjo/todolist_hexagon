@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from collections import OrderedDict
 from dataclasses import dataclass
 
-from src.todolist_hexagon.shared.type import TaskKey, UserKey
+from todolist_hexagon.shared.type import TaskKey, UserKey
 
 
 @dataclass(frozen=True)

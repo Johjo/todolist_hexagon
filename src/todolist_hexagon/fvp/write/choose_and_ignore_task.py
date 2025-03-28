@@ -1,5 +1,5 @@
-from src.todolist_hexagon.fvp.aggregate import FinalVersionPerfectedSession, FvpSessionSetPort
-from src.todolist_hexagon.shared.type import TaskKey, UserKey
+from todolist_hexagon.fvp.aggregate import FinalVersionPerfectedSession, FvpSessionSetPort
+from todolist_hexagon.shared.type import TaskKey, UserKey
 
 
 class ChooseAndIgnoreTaskFvp:

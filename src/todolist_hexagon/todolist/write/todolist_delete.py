@@ -1,7 +1,7 @@
 from expression import Result, Ok
 
-from src.todolist_hexagon.shared.type import TodolistKey
-from src.todolist_hexagon.todolist.port import TodolistSetPort
+from todolist_hexagon.shared.type import TodolistKey
+from todolist_hexagon.todolist.port import TodolistSetPort
 
 
 class TodolistDelete:

@@ -1,4 +1,4 @@
-from src.todolist_hexagon.fvp.aggregate import FvpSessionSetPort
+from todolist_hexagon.fvp.aggregate import FvpSessionSetPort
 from tests.todolist_hexagon.todolist.fixture import TodolistSetForTest, TaskKeyGeneratorForTest
 
 

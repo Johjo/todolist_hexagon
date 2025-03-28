@@ -5,10 +5,10 @@ import pytest
 from faker import Faker
 from typing_extensions import Protocol
 
-from src.todolist_hexagon.fvp.aggregate import Task, DoTheTask, ChooseTheTask, FvpSnapshot, NothingToDo, \
+from todolist_hexagon.fvp.aggregate import Task, DoTheTask, ChooseTheTask, FvpSnapshot, NothingToDo, \
     FvpSessionSetPort
-from src.todolist_hexagon.fvp.read.which_task import TodolistPort, WhichTaskFilter, WhichTaskQuery
-from src.todolist_hexagon.shared.type import UserKey, TaskKey, TodolistKey
+from todolist_hexagon.fvp.read.which_task import TodolistPort, WhichTaskFilter, WhichTaskQuery
+from todolist_hexagon.shared.type import UserKey, TaskKey, TodolistKey
 from tests.todolist_hexagon.fvp.write.fixture import FvpSessionSetForTest
 
 

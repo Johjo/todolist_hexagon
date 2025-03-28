@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from typing import Tuple
 
-from src.todolist_hexagon.shared.type import TodolistKey, UserKey, TodolistName
+from todolist_hexagon.shared.type import TodolistKey, UserKey, TodolistName
 
 
 @dataclass(frozen=True)

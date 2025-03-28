@@ -1,8 +1,8 @@
 from expression import Result, Nothing, Error, Ok
 
-from src.todolist_hexagon.shared.type import TodolistName, TodolistKey
-from src.todolist_hexagon.todolist.aggregate import TodolistAggregate
-from src.todolist_hexagon.todolist.port import TodolistSetPort
+from todolist_hexagon.shared.type import TodolistName, TodolistKey
+from todolist_hexagon.todolist.aggregate import TodolistAggregate
+from todolist_hexagon.todolist.port import TodolistSetPort
 
 
 class TodolistCreate:
