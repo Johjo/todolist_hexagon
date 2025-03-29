@@ -1,14 +1,14 @@
 from dataclasses import replace
-from uuid import UUID, uuid4
 
 import pytest
 from faker import Faker
 
+from todolist_hexagon.builder import FvpFaker
 from todolist_hexagon.fvp.aggregate import Task, DoTheTask, ChooseTheTask, FvpSnapshot, NothingToDo, \
     FvpSessionSetPort
 from todolist_hexagon.fvp.read.which_task import TodolistPort, WhichTaskFilter, WhichTaskQuery
 from todolist_hexagon.read_adapter_dependencies import ReadAdapterDependenciesPort
-from todolist_hexagon.shared.type import UserKey, TaskKey, TodolistKey
+from todolist_hexagon.shared.type import UserKey
 from tests.todolist_hexagon.fvp.write.fixture import FvpSessionSetForTest
 
 
@@ -65,24 +65,6 @@ def todolist_name():
 @pytest.fixture
 def fvp_session_set():
     return FvpSessionSetForTest()
-
-
-class FvpFaker:
-    def __init__(self, fake: Faker):
-        self._fake: Faker = fake
-
-    def a_task(self, key: None | int = None) -> Task:
-        if key is None:
-            key = self._fake.random_int()
-        return Task(key=TaskKey(UUID(int=key)))
-
-    def a_which_task_filter(self) -> WhichTaskFilter:
-        return WhichTaskFilter(todolist_key=TodolistKey(uuid4()), reference_date=self._fake.date_object(),
-                               include_context=(self._fake.word(),),
-                               exclude_context=(self._fake.word(),))
-
-    def a_user_key(self) -> UserKey:
-        return UserKey(self._fake.email())
 
 
 @pytest.fixture

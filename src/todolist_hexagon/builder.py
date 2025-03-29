@@ -6,7 +6,11 @@ from uuid import UUID, uuid4
 from expression import Option, Nothing, Some
 from faker import Faker
 
-from todolist_hexagon.shared.type import TaskKey, TaskName, TodolistName, TaskOpen, TaskExecutionDate, TodolistKey
+from todolist_hexagon.fvp.aggregate import Task
+from todolist_hexagon.fvp.read.which_task import WhichTaskFilter
+
+from todolist_hexagon.shared.type import TaskKey, TaskName, TodolistName, TaskOpen, TaskExecutionDate, TodolistKey, \
+    UserKey
 from todolist_hexagon.todolist.aggregate import TaskSnapshot, TodolistSnapshot
 
 
@@ -140,3 +144,21 @@ class TodolistFaker:
 
     def a_datetime(self) -> datetime:
         return self.fake.date_time()
+
+
+class FvpFaker:
+    def __init__(self, fake: Faker):
+        self._fake: Faker = fake
+
+    def a_task(self, key: None | int = None) -> Task:
+        if key is None:
+            key = self._fake.random_int()
+        return Task(key=TaskKey(UUID(int=key)))
+
+    def a_which_task_filter(self) -> WhichTaskFilter:
+        return WhichTaskFilter(todolist_key=TodolistKey(uuid4()), reference_date=self._fake.date_object(),
+                               include_context=(self._fake.word(),),
+                               exclude_context=(self._fake.word(),))
+
+    def a_user_key(self) -> UserKey:
+        return UserKey(self._fake.email())
