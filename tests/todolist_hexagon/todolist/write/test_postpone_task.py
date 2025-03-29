@@ -9,13 +9,13 @@ from todolist_hexagon.use_case_dependencies import UseCaseDependencies
 
 from todolist_hexagon.builder import TodolistFaker
 from tests.todolist_hexagon.todolist.fixture import TodolistSetForTest
-from tests.todolist_hexagon.adapter_dependencies_for_test import AdapterDependenciesForTest
-
+from tests.todolist_hexagon.read_adapter_dependencies_for_test import ReadAdapterDependenciesForTest
+from tests.todolist_hexagon.write_adapter_dependencies_for_test import WriteAdapterDependenciesForTest
 
 
 @pytest.fixture
 def sut(todolist_set: TodolistSetForTest) -> PostPoneTask:
-    return UseCaseDependencies(AdapterDependenciesForTest(todolist_set=todolist_set)).postpone_task()
+    return UseCaseDependencies(WriteAdapterDependenciesForTest(todolist_set=todolist_set)).postpone_task()
 
 
 def test_save_postponed_task(sut: PostPoneTask, todolist_set: TodolistSetForTest, fake: TodolistFaker):

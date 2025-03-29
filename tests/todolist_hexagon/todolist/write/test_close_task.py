@@ -8,12 +8,13 @@ from todolist_hexagon.use_case_dependencies import UseCaseDependencies
 
 from todolist_hexagon.builder import TodolistFaker
 from tests.todolist_hexagon.todolist.fixture import TodolistSetForTest
-from tests.todolist_hexagon.adapter_dependencies_for_test import AdapterDependenciesForTest
+from tests.todolist_hexagon.read_adapter_dependencies_for_test import ReadAdapterDependenciesForTest
+from tests.todolist_hexagon.write_adapter_dependencies_for_test import WriteAdapterDependenciesForTest
 
 
 @pytest.fixture
 def sut(todolist_set: TodolistSetForTest):
-    return UseCaseDependencies(AdapterDependenciesForTest(todolist_set)).close_task()
+    return UseCaseDependencies(WriteAdapterDependenciesForTest(todolist_set)).close_task()
 
 
 def test_close_task(sut: CloseTaskUseCase, todolist_set: TodolistSetForTest, fake: TodolistFaker):

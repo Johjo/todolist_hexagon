@@ -7,7 +7,7 @@ from todolist_hexagon.builder import TodolistFaker
 from tests.todolist_hexagon.todolist.fixture import TaskKeyGeneratorForTest, TodolistSetForTest
 
 from todolist_hexagon.todolist.write.open_task import OpenTaskUseCase
-from tests.todolist_hexagon.adapter_dependencies_for_test import AdapterDependenciesForTest
+from tests.todolist_hexagon.write_adapter_dependencies_for_test import WriteAdapterDependenciesForTest
 
 
 @pytest.fixture
@@ -17,7 +17,7 @@ def task_key_generator() -> TaskKeyGeneratorForTest:
 
 @pytest.fixture
 def sut(todolist_set: TodolistSetForTest, task_key_generator: TaskKeyGeneratorForTest) -> OpenTaskUseCase:
-    return UseCaseDependencies(AdapterDependenciesForTest(todolist_set=todolist_set, task_key_generator=task_key_generator)).open_task()
+    return UseCaseDependencies(WriteAdapterDependenciesForTest(todolist_set=todolist_set, task_key_generator=task_key_generator)).open_task()
 
 
 def test_open_task_when_no_task(sut: OpenTaskUseCase, todolist_set: TodolistSetForTest,

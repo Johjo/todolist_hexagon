@@ -1,7 +1,7 @@
 import pytest
 
-from tests.todolist_hexagon.adapter_dependencies_for_test import AdapterDependenciesForTest
 from tests.todolist_hexagon.fvp.write.fixture import FvpSessionSetForTest
+from tests.todolist_hexagon.write_adapter_dependencies_for_test import WriteAdapterDependenciesForTest
 from todolist_hexagon.builder import a_task_key
 from todolist_hexagon.fvp.aggregate import FvpSnapshot
 from todolist_hexagon.fvp.write.cancel_priority import CancelPriority
@@ -16,7 +16,7 @@ def session_set():
 
 @pytest.fixture
 def sut(session_set: FvpSessionSetForTest):
-    return UseCaseDependencies(AdapterDependenciesForTest(fvp_session_set=session_set)).cancel_priority()
+    return UseCaseDependencies(WriteAdapterDependenciesForTest(fvp_session_set=session_set)).cancel_priority()
 
 
 def test_remove_priority_when_only_one(sut: CancelPriority, session_set: FvpSessionSetForTest):

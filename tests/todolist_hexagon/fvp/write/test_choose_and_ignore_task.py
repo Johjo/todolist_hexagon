@@ -2,7 +2,7 @@ from typing import OrderedDict
 
 import pytest
 
-from tests.todolist_hexagon.adapter_dependencies_for_test import AdapterDependenciesForTest
+from tests.todolist_hexagon.read_adapter_dependencies_for_test import ReadAdapterDependenciesForTest
 from tests.todolist_hexagon.fvp.write.fixture import FvpSessionSetForTest
 from todolist_hexagon.builder import a_task_key
 from todolist_hexagon.fvp.aggregate import FvpSnapshot
@@ -17,7 +17,7 @@ def fvp_sessions_set():
 
 @pytest.fixture
 def sut(fvp_sessions_set):
-    return UseCaseDependencies(AdapterDependenciesForTest(fvp_session_set=fvp_sessions_set)).choose_and_ignore_task()
+    return UseCaseDependencies(ReadAdapterDependenciesForTest(fvp_session_set=fvp_sessions_set)).choose_and_ignore_task()
 
 
 

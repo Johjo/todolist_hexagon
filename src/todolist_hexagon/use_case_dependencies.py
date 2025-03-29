@@ -38,10 +38,10 @@ class UseCaseDependencies:
         return RewordTask(todolist_set=self._adapter_dependencies.todolist_set())
 
     def cancel_priority(self) -> CancelPriority:
-        return CancelPriority(session_set=self._adapter_dependencies.session_set())
+        return CancelPriority(session_set=self._adapter_dependencies.fvp_session_set())
 
     def choose_and_ignore_task(self) -> ChooseAndIgnoreTaskFvp:
-        return ChooseAndIgnoreTaskFvp(set_of_fvp_sessions=self._adapter_dependencies.session_set())
+        return ChooseAndIgnoreTaskFvp(set_of_fvp_sessions=self._adapter_dependencies.fvp_session_set())
 
     def reset_fvp_session(self) -> ResetFvpSession:
-        return ResetFvpSession(set_of_fvp_sessions=self._adapter_dependencies.session_set())
+        return ResetFvpSession(set_of_fvp_sessions=self._adapter_dependencies.fvp_session_set())

@@ -34,7 +34,7 @@ class QueryDependencies:
                               fvp_sessions_set=self._adapter_dependencies.fvp_session_set())
 
 
-class AdapterDependenciesForTest:
+class ReadAdapterDependenciesForTest(ReadAdapterDependenciesPort):
     def __init__(self, fvp_session_set: FvpSessionSetPort | None = None, todolist_set: TodolistPort | None = None):
         self._fvp_session = fvp_session_set
         self._todolist = todolist_set
@@ -53,7 +53,7 @@ class AdapterDependenciesForTest:
 @pytest.fixture
 def sut(fvp_session_set: FvpSessionSetForTest, todolist_name: TodolistForTest):
     return QueryDependencies(
-        AdapterDependenciesForTest(fvp_session_set=fvp_session_set, todolist_set=todolist_name)).which_task()
+        ReadAdapterDependenciesForTest(fvp_session_set=fvp_session_set, todolist_set=todolist_name)).which_task()
 
 
 
