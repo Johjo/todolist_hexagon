@@ -2,7 +2,8 @@ import pytest
 from expression import Ok, Error
 
 from todolist_hexagon.todolist.write.import_many_task import ImportManyTask, ExternalTodoListPort, TaskImported
-from use_case_dependencies import UseCaseDependencies
+from todolist_hexagon.use_case_dependencies import UseCaseDependencies
+
 from todolist_hexagon.builder import TodolistFaker, TaskBuilder
 from tests.todolist_hexagon.todolist.fixture import TaskKeyGeneratorForTest, TodolistSetForTest
 from tests.todolist_hexagon.adapter_dependencies_for_test import AdapterDependenciesForTest

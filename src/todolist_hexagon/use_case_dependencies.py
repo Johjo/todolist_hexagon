@@ -1,10 +1,6 @@
-from typing import Protocol
-
-from todolist_hexagon.fvp.aggregate import FvpSessionSetPort
 from todolist_hexagon.fvp.write.cancel_priority import CancelPriority
 from todolist_hexagon.fvp.write.choose_and_ignore_task import ChooseAndIgnoreTaskFvp
 from todolist_hexagon.fvp.write.reset_fvp_session import ResetFvpSession
-from todolist_hexagon.todolist.port import TodolistSetPort, TaskKeyGeneratorPort
 from todolist_hexagon.todolist.write.close_task import CloseTaskPrimaryPort, CloseTaskUseCase
 from todolist_hexagon.todolist.write.create_todolist import TodolistCreate
 from todolist_hexagon.todolist.write.import_many_task import ImportManyTask
@@ -12,18 +8,11 @@ from todolist_hexagon.todolist.write.open_task import OpenTaskUseCase
 from todolist_hexagon.todolist.write.postpone_task import PostPoneTask
 from todolist_hexagon.todolist.write.reword_task import RewordTask
 from todolist_hexagon.todolist.write.todolist_delete import TodolistDelete
-
-
-class AdapterDependenciesPort(Protocol):
-    def todolist_set(self) -> TodolistSetPort: ...
-
-    def task_key_generator(self) -> TaskKeyGeneratorPort: ...
-
-    def session_set(self) -> FvpSessionSetPort: ...
+from todolist_hexagon.write_adapter_dependencies import WriteAdapterDependenciesPort
 
 
 class UseCaseDependencies:
-    def __init__(self, adapter_dependencies: AdapterDependenciesPort):
+    def __init__(self, adapter_dependencies: WriteAdapterDependenciesPort):
         self._adapter_dependencies = adapter_dependencies
 
     def close_task(self) -> CloseTaskPrimaryPort:

@@ -7,7 +7,7 @@ from faker import Faker
 from todolist_hexagon.fvp.aggregate import Task, DoTheTask, ChooseTheTask, FvpSnapshot, NothingToDo, \
     FvpSessionSetPort
 from todolist_hexagon.fvp.read.which_task import TodolistPort, WhichTaskFilter, WhichTaskQuery
-from todolist_hexagon.query_dependencies import QueryAdapterDependenciesPort
+from todolist_hexagon.read_adapter_dependencies import ReadAdapterDependenciesPort
 from todolist_hexagon.shared.type import UserKey, TaskKey, TodolistKey
 from tests.todolist_hexagon.fvp.write.fixture import FvpSessionSetForTest
 
@@ -26,7 +26,7 @@ class TodolistForTest(TodolistPort):
 
 
 class QueryDependencies:
-    def __init__(self, adapter_dependencies: QueryAdapterDependenciesPort):
+    def __init__(self, adapter_dependencies: ReadAdapterDependenciesPort):
         self._adapter_dependencies = adapter_dependencies
 
     def which_task(self):

@@ -6,7 +6,7 @@ from todolist_hexagon.builder import a_task_key
 from todolist_hexagon.fvp.aggregate import FvpSnapshot
 from todolist_hexagon.fvp.write.cancel_priority import CancelPriority
 from todolist_hexagon.shared.type import UserKey
-from use_case_dependencies import UseCaseDependencies
+from todolist_hexagon.use_case_dependencies import UseCaseDependencies
 
 
 @pytest.fixture

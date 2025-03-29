@@ -3,7 +3,8 @@ from collections import OrderedDict
 import pytest
 
 from todolist_hexagon.shared.type import UserKey, TaskKey
-from use_case_dependencies import UseCaseDependencies
+from todolist_hexagon.use_case_dependencies import UseCaseDependencies
+
 from todolist_hexagon.builder import a_task_key
 from todolist_hexagon.fvp.write.reset_fvp_session import ResetFvpSession
 

@@ -2,12 +2,12 @@ from typing import OrderedDict
 
 import pytest
 
-from todolist_hexagon.fvp.aggregate import FvpSnapshot
-from todolist_hexagon.shared.type import TaskKey, UserKey
-from use_case_dependencies import UseCaseDependencies
-from todolist_hexagon.builder import a_task_key
 from tests.todolist_hexagon.adapter_dependencies_for_test import AdapterDependenciesForTest
 from tests.todolist_hexagon.fvp.write.fixture import FvpSessionSetForTest
+from todolist_hexagon.builder import a_task_key
+from todolist_hexagon.fvp.aggregate import FvpSnapshot
+from todolist_hexagon.shared.type import TaskKey, UserKey
+from todolist_hexagon.use_case_dependencies import UseCaseDependencies
 
 
 @pytest.fixture
