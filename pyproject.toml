@@ -13,7 +13,7 @@ dependencies = [
 ]
 
 [tool.poetry]
-packages = [{include = "todolist_hexagon", from = "src"}, {include = "tests"}]
+packages = [{include = "todolist_hexagon", from = "src"}]
 
 
 [build-system]
