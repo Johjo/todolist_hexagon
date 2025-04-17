@@ -26,5 +26,6 @@ class Todolist:
 class TodolistState:
     exist: bool
 
-    def evolve(self):
+    @staticmethod
+    def evolve():
         return TodolistState(exist=True)
