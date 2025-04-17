@@ -8,15 +8,15 @@ Command = CreateTodolist
 class Todolist:
     def __init__(self, events: EventList) -> None:
         self._state = TodolistState(exist=True)
-        self._exist : bool = False
         self._evolve(events)
 
     def _evolve(self, events: EventList) -> None:
-        self._exist = events
+        self._state = TodolistState(exist=len(events) > 0)
+
 
     def decide(self, command: Command) -> EventList:
         events = []
-        if not self._exist:
+        if not self._state.exist:
             events = [TodoListCreated(command.key)]
         return events
 
