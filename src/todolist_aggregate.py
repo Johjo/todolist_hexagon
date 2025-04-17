@@ -7,7 +7,7 @@ Command = CreateTodolist
 
 class Todolist:
     def __init__(self, events: EventList) -> None:
-        self._state = TodolistState(exist=True)
+        self._state = TodolistState(exist=False)
         self._evolve(events)
 
     def _evolve(self, events: EventList) -> None:
