@@ -5,9 +5,10 @@ Command = CreateTodolist
 
 class Todolist:
     def __init__(self, events: EventList) -> None:
-        self.evolve(events)
+        self._exist : bool = False
+        self._evolve(events)
 
-    def evolve(self, events: EventList) -> None:
+    def _evolve(self, events: EventList) -> None:
         self._exist = events
 
     def decide(self, command: Command) -> EventList:
