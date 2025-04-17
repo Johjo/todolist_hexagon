@@ -11,7 +11,8 @@ class Todolist:
         self._evolve(events)
 
     def _evolve(self, events: EventList) -> None:
-        self._state = TodolistState(exist=len(events) > 0)
+        if events:
+            self._state = TodolistState(exist=True)
 
 
     def decide(self, command: Command) -> EventList:
