@@ -12,7 +12,7 @@ class Todolist:
 
     def _evolve(self, events: EventList) -> None:
         if events:
-            self._state = TodolistState(exist=True)
+            self._state = self._state.evolve()
 
 
     def decide(self, command: Command) -> EventList:
@@ -25,3 +25,6 @@ class Todolist:
 @dataclass(frozen=True, eq=True)
 class TodolistState:
     exist: bool
+
+    def evolve(self):
+        return TodolistState(exist=True)
