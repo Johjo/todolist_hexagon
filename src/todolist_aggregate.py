@@ -18,7 +18,7 @@ class Todolist:
     def decide(self, command: Command) -> EventList:
         events = []
         if not self._state.exist:
-            events = [TodoListCreated(command.key)]
+            events.append(TodoListCreated(command.key))
         return events
 
 
