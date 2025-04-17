@@ -1,8 +1,8 @@
-from uuid import uuid4, UUID
+from uuid import uuid4
 
-from src.events import TodoListCreated, EventList
+from src.events import TodoListCreated
 from src.todolist_usecase import TodolistUseCase
-from src.ports import EventStore
+from tests.test_todolist.event_store_for_test import EventStoreForTest
 
 
 def test_todolist_created_when_create_todolist() -> None:
@@ -38,14 +38,3 @@ def test_two_todolist_created_when_create_two_todolist() -> None:
     assert event_store.all_events == [TodoListCreated(key=todolist_key_one), TodoListCreated(key=todolist_key_two)]
 
 
-class EventStoreForTest(EventStore):
-    def __init__(self) -> None:
-        self.all_events: EventList = []
-        self.events: dict[UUID, EventList] = {}
-
-    def save(self, key: UUID, events: EventList) -> None:
-        self.all_events.extend(events)
-        self.events[key] = events
-
-    def events_for(self, key: UUID) -> EventList:
-        return self.events.get(key, [])
