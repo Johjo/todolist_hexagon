@@ -4,7 +4,7 @@ from todolist_hexagon.events import EventList
 from todolist_hexagon.ports import EventStorePort, AggregateEvent
 
 
-class EventStoreForTest(EventStorePort):
+class EventStoreInMemory(EventStorePort):
     def __init__(self) -> None:
         self.events: dict[UUID, EventList] = {}
 

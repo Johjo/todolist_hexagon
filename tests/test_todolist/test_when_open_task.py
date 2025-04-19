@@ -3,20 +3,20 @@ from uuid import uuid4
 import pytest
 
 from todolist_hexagon.events import TaskOpened, TaskAttached
+from todolist_hexagon.secondary.event_store_in_memory import EventStoreInMemory
 from todolist_hexagon.todolist_usecase import TodolistUseCase
-from test_todolist.event_store_for_test import EventStoreForTest
 
 
 @pytest.fixture
-def event_store() -> EventStoreForTest:
-    return EventStoreForTest()
+def event_store() -> EventStoreInMemory:
+    return EventStoreInMemory()
 
 @pytest.fixture
-def sut(event_store: EventStoreForTest) -> TodolistUseCase:
+def sut(event_store: EventStoreInMemory) -> TodolistUseCase:
     return TodolistUseCase(event_store)
 
 
-def test_task_opened_when_open_task(sut: TodolistUseCase, event_store: EventStoreForTest) -> None:
+def test_task_opened_when_open_task(sut: TodolistUseCase, event_store: EventStoreInMemory) -> None:
     todolist_key = uuid4()
     task_key = uuid4()
     task_title = f"some title{uuid4()}"
@@ -25,7 +25,7 @@ def test_task_opened_when_open_task(sut: TodolistUseCase, event_store: EventStor
     assert TaskOpened(title=task_title, description=task_description) in event_store.events_for(key=task_key)
 
 
-def test_task_attached_to_todolist_when_open_task(sut: TodolistUseCase, event_store: EventStoreForTest) -> None:
+def test_task_attached_to_todolist_when_open_task(sut: TodolistUseCase, event_store: EventStoreInMemory) -> None:
     todolist_key = uuid4()
     task_key = uuid4()
     task_title = f"some title{uuid4()}"
