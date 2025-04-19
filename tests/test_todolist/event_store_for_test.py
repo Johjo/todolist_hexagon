@@ -1,10 +1,10 @@
 from uuid import UUID
 
 from todolist_hexagon.events import EventList
-from todolist_hexagon.ports import EventStore, AggregateEvent
+from todolist_hexagon.ports import EventStorePort, AggregateEvent
 
 
-class EventStoreForTest(EventStore):
+class EventStoreForTest(EventStorePort):
     def __init__(self) -> None:
         self.events: dict[UUID, EventList] = {}
 

@@ -10,7 +10,7 @@ class AggregateEvent:
     key: UUID
     events: EventList
 
-class EventStore(ABC):
+class EventStorePort(ABC):
     @abstractmethod
     def save(self, *aggregate_event: AggregateEvent) -> None:
         pass

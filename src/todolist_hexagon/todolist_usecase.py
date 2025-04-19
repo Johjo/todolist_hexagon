@@ -4,7 +4,7 @@ from uuid import UUID
 
 from todolist_hexagon.commands import CreateTodolist, AttachTask
 from todolist_hexagon.events import TaskOpened, EventList
-from todolist_hexagon.ports import EventStore, AggregateEvent
+from todolist_hexagon.ports import EventStorePort, AggregateEvent
 from todolist_hexagon.todolist_aggregate import Todolist
 
 
@@ -31,7 +31,7 @@ class TodolistUseCasePort:
 
 
 class TodolistUseCase(TodolistUseCasePort):
-    def __init__(self, event_store: EventStore) -> None:
+    def __init__(self, event_store: EventStorePort) -> None:
         self.event_store = event_store
 
     def create_todolist(self, todolist_key: UUID) -> None:
