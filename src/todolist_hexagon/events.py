@@ -9,13 +9,19 @@ class TodoListCreated:
 
 @dataclass(frozen=True, eq=True)
 class TaskOpened:
-    title: str
-    description: str
+    pass
 
 
 @dataclass
 class TaskAttached:
     task_key: UUID
 
-Event = TodoListCreated | TaskOpened | TaskAttached
+@dataclass
+class TaskDescribed:
+    title: str
+    description: str
+
+
+TaskEvent = TaskOpened | TaskAttached | TaskDescribed
+Event = TodoListCreated | TaskEvent
 EventList = list[Event]

@@ -3,7 +3,7 @@ from dataclasses import dataclass
 from uuid import UUID
 
 from todolist_hexagon.commands import CreateTodolist, AttachTask
-from todolist_hexagon.events import TaskOpened, EventList
+from todolist_hexagon.events import TaskOpened, EventList, TaskDescribed
 from todolist_hexagon.ports import EventStorePort, AggregateEvent
 from todolist_hexagon.todolist_aggregate import Todolist
 
@@ -17,7 +17,7 @@ class OpenTask:
 
 class Task:
     def decide(self, command: OpenTask) -> EventList:
-        return [TaskOpened(title=command.title, description=command.description)]
+        return [TaskDescribed(title=command.title, description=command.description), TaskOpened()]
 
 
 class TodolistUseCasePort:
