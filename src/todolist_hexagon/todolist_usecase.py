@@ -22,7 +22,7 @@ class Task:
 
 class TodolistUseCasePort:
     @abstractmethod
-    def create_todolist(self, key: UUID) -> None:
+    def create_todolist(self, todolist_key: UUID) -> None:
         pass
 
     @abstractmethod
