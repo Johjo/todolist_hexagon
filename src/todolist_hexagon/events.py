@@ -11,6 +11,10 @@ class TodoListCreated:
 class TaskOpened:
     pass
 
+@dataclass
+class TaskClosed:
+    pass
+
 
 @dataclass
 class TaskAttached:
@@ -22,6 +26,9 @@ class TaskDescribed:
     description: str
 
 
-TaskEvent = TaskOpened | TaskAttached | TaskDescribed
-Event = TodoListCreated | TaskEvent
+TaskEvent = TaskOpened |  TaskDescribed | TaskClosed
+TodolistEvent = TodoListCreated | TaskAttached
+Event = TodolistEvent | TaskEvent
 EventList = list[Event]
+
+
