@@ -1,6 +1,7 @@
 from abc import abstractmethod, ABC
-from datetime import datetime
 from uuid import UUID
+
+from datetime_provider import DateTimeProviderPrimaryPort
 
 from todolist_hexagon.commands import CreateTodolist, AttachTask, OpenTask, CloseTask, TaskCommand
 from todolist_hexagon.events import TaskOpened, EventList, TaskDescribed, TaskClosed
@@ -35,14 +36,8 @@ class TodolistUseCasePort(ABC):
         pass
 
 
-class DateTimeProviderPort(ABC):
-    @abstractmethod
-    def now(self) -> datetime:
-        pass
-
-
 class TodolistUseCase(TodolistUseCasePort):
-    def __init__(self, event_store: EventStorePort, datetime_provider: DateTimeProviderPort) -> None:
+    def __init__(self, event_store: EventStorePort, datetime_provider: DateTimeProviderPrimaryPort) -> None:
         self._datetime_provider = datetime_provider
         self.event_store = event_store
 

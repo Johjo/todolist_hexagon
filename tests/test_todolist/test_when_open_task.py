@@ -1,9 +1,9 @@
 from uuid import uuid4
 
 import pytest
+from datetime_provider import DateTimeProviderDeterministic
 
 from test_todolist.conftest import datetime_provider
-from test_todolist.datetime_provider_fixed import DateTimeProviderFixed
 from test_todolist.fixture import NOW
 from todolist_hexagon.events import TaskOpened, TaskAttached, TaskDescribed
 from todolist_hexagon.secondary.event_store_in_memory import EventStoreInMemory
@@ -16,7 +16,7 @@ def event_store() -> EventStoreInMemory:
 
 
 @pytest.fixture
-def sut(event_store: EventStoreInMemory, datetime_provider: DateTimeProviderFixed) -> TodolistUseCase:
+def sut(event_store: EventStoreInMemory, datetime_provider: DateTimeProviderDeterministic) -> TodolistUseCase:
     return TodolistUseCase(event_store, datetime_provider=datetime_provider)
 
 

@@ -9,7 +9,8 @@ readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
     "pytest (>=8.3.5,<9.0.0)",
-    "mypy (>=1.15.0,<2.0.0)"
+    "mypy (>=1.15.0,<2.0.0)",
+    "datetime-provider @ git+https://github.com/Johjo/python_date_time_provider.git"
 ]
 
 [tool.poetry]
