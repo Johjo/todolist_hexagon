@@ -1,27 +1,32 @@
 from dataclasses import dataclass
+from datetime import datetime
 from uuid import UUID
 
 
+@dataclass(frozen=True)
+class EventBase:
+    when: datetime
+
 @dataclass(frozen=True, eq=True)
-class TodoListCreated:
+class TodoListCreated(EventBase):
     todolist_key: UUID
 
 
 @dataclass(frozen=True, eq=True)
-class TaskOpened:
+class TaskOpened(EventBase):
     pass
 
-@dataclass
-class TaskClosed:
+@dataclass(frozen=True)
+class TaskClosed(EventBase):
     pass
 
 
-@dataclass
-class TaskAttached:
+@dataclass(frozen=True)
+class TaskAttached(EventBase):
     task_key: UUID
 
-@dataclass
-class TaskDescribed:
+@dataclass(frozen=True)
+class TaskDescribed(EventBase):
     title: str
     description: str
 
