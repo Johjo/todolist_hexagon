@@ -6,14 +6,12 @@ from todolist_hexagon.ports import EventStorePort, AggregateEvent
 
 class EventStoreInMemory(EventStorePort):
     def __init__(self) -> None:
-        self.events: dict[UUID, EventList] = {}
+        self.events : dict[UUID, EventList] = {}
 
     def save(self, *aggregate_events: AggregateEvent) -> None:
-        for aggregate_event in aggregate_events:
-            previous_events = self.events.get(aggregate_event.key, [])
-            previous_events.extend(aggregate_event.events)
-            self.events[aggregate_event.key] = previous_events
+        for truc in aggregate_events:
+            self.events.setdefault(truc.key, [])
+            self.events[truc.key].extend(truc.events)
 
     def events_for(self, key: UUID) -> EventList:
         return self.events.get(key, [])
-

@@ -12,7 +12,7 @@ class AggregateEvent:
 
 class EventStorePort(ABC):
     @abstractmethod
-    def save(self, *aggregate_event: AggregateEvent) -> None:
+    def save(self, *aggregate_events: AggregateEvent) -> None:
         pass
 
     @abstractmethod
