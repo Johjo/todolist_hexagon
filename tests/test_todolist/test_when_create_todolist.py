@@ -22,7 +22,7 @@ def test_todolist_created_when_create_todolist(sut: TodolistUseCase, event_store
 
     sut.create_todolist(todolist_key=todolist_key)
 
-    assert TodoListCreated(todolist_key=todolist_key, when=NOW) in event_store.events_for(key=todolist_key)
+    assert TodoListCreated(when=NOW) in event_store.events_for(key=todolist_key)
 
 
 def test_todolist_created_one_time_when_create_same_todolist_twice(sut: TodolistUseCase, event_store: EventStoreInMemory) -> None:
@@ -31,7 +31,7 @@ def test_todolist_created_one_time_when_create_same_todolist_twice(sut: Todolist
     sut.create_todolist(todolist_key=todolist_key)
     sut.create_todolist(todolist_key=todolist_key)
 
-    assert event_store.events_for(key=todolist_key) == [TodoListCreated(todolist_key=todolist_key, when=NOW)]
+    assert event_store.events_for(key=todolist_key) == [TodoListCreated(when=NOW)]
 
 
 def test_two_todolist_created_when_create_two_todolist(sut: TodolistUseCase, event_store: EventStoreInMemory) -> None:
@@ -41,7 +41,7 @@ def test_two_todolist_created_when_create_two_todolist(sut: TodolistUseCase, eve
     sut.create_todolist(todolist_key=todolist_key_one)
     sut.create_todolist(todolist_key=todolist_key_two)
 
-    assert TodoListCreated(todolist_key=todolist_key_one, when=NOW) in event_store.events_for(key=todolist_key_one)
-    assert TodoListCreated(todolist_key=todolist_key_two, when=NOW) in event_store.events_for(key=todolist_key_two)
+    assert TodoListCreated(when=NOW) in event_store.events_for(key=todolist_key_one)
+    assert TodoListCreated(when=NOW) in event_store.events_for(key=todolist_key_two)
 
 

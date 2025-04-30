@@ -20,7 +20,7 @@ class Todolist:
         match command:
             case CreateTodolist():
                 if not self._state.exist:
-                    events.append(TodoListCreated(todolist_key=command.key, when=command.when))
+                    events.append(TodoListCreated(when=command.when))
 
             case AttachTask(task_key=task_key, when=when):
                 events.append(TaskAttached(task_key=task_key, when=when))

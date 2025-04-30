@@ -19,7 +19,7 @@ class BaseTestEventStore(ABC):
         ["TaskOpened", TaskOpened(when=datetime.now())],
         ["TaskDescribed", TaskDescribed(title="some title", description="some description", when=datetime.now())],
         ["TaskClosed", TaskClosed(when=datetime.now())],
-        ["TodoListCreated", TodoListCreated(todolist_key=uuid4(), when=datetime.now())],
+        ["TodoListCreated", TodoListCreated(when=datetime.now())],
         ["TaskAttached", TaskAttached(task_key=uuid4(), when=datetime.now())],
     ])
     def test_give_event_when_event_saved(self, event_name: str, event: Event) -> None:
@@ -32,32 +32,32 @@ class BaseTestEventStore(ABC):
         sut = self._sut()
         aggregate_one = UUID(int=1)
         aggregate_two = UUID(int=2)
-        sut.save(AggregateEvent(key=aggregate_one, events=[TodoListCreated(todolist_key=aggregate_one, when=NOW)]))
+        sut.save(AggregateEvent(key=aggregate_one, events=[TodoListCreated(when=NOW)]))
         sut.save(AggregateEvent(key=aggregate_two, events=[TaskOpened(when=NOW)]))
-        assert sut.events_for(key=aggregate_one) == [TodoListCreated(todolist_key=aggregate_one, when=NOW)]
+        assert sut.events_for(key=aggregate_one) == [TodoListCreated(when=NOW)]
         assert sut.events_for(key=aggregate_two) == [TaskOpened(when=NOW)]
 
     def test_can_save_multiple_events_for_same_aggregate(self) -> None:
         sut = self._sut()
         aggregate_one = UUID(int=1)
-        sut.save(AggregateEvent(key=aggregate_one, events=[TodoListCreated(todolist_key=aggregate_one, when=NOW), TaskOpened(when=NOW)]))
-        assert sut.events_for(key=aggregate_one) == [TodoListCreated(todolist_key=aggregate_one, when=NOW), TaskOpened(when=NOW)]
+        sut.save(AggregateEvent(key=aggregate_one, events=[TodoListCreated(when=NOW), TaskOpened(when=NOW)]))
+        assert sut.events_for(key=aggregate_one) == [TodoListCreated(when=NOW), TaskOpened(when=NOW)]
 
     def test_can_save_multiple_aggregates(self) -> None:
         sut = self._sut()
         aggregate_one = UUID(int=1)
         aggregate_two = UUID(int=2)
-        sut.save(AggregateEvent(key=aggregate_one, events=[TodoListCreated(todolist_key=aggregate_one, when=NOW)]), AggregateEvent(key=aggregate_two, events=[TaskOpened(when=NOW)]))
-        assert sut.events_for(key=aggregate_one) == [TodoListCreated(todolist_key=aggregate_one, when=NOW)]
+        sut.save(AggregateEvent(key=aggregate_one, events=[TodoListCreated(when=NOW)]), AggregateEvent(key=aggregate_two, events=[TaskOpened(when=NOW)]))
+        assert sut.events_for(key=aggregate_one) == [TodoListCreated(when=NOW)]
         assert sut.events_for(key=aggregate_two) == [TaskOpened(when=NOW)]
 
     def test_can_save_same_aggregate_without_overwriting_it(self) -> None:
         sut = self._sut()
         aggregate_one = UUID(int=1)
-        sut.save(AggregateEvent(key=aggregate_one, events=[TodoListCreated(todolist_key=aggregate_one, when=NOW)]))
+        sut.save(AggregateEvent(key=aggregate_one, events=[TodoListCreated(when=NOW)]))
         sut.save(AggregateEvent(key=aggregate_one, events=[TaskOpened(when=NOW)]))
 
-        assert sut.events_for(key=aggregate_one) == [TodoListCreated(todolist_key=aggregate_one, when=NOW), TaskOpened(when=NOW)]
+        assert sut.events_for(key=aggregate_one) == [TodoListCreated(when=NOW), TaskOpened(when=NOW)]
 
 
     @abstractmethod

@@ -9,7 +9,7 @@ class EventBase:
 
 @dataclass(frozen=True, eq=True)
 class TodoListCreated(EventBase):
-    todolist_key: UUID
+    pass
 
 
 @dataclass(frozen=True, eq=True)
