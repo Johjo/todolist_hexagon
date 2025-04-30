@@ -1,10 +1,10 @@
 from abc import ABC, abstractmethod
 from datetime import datetime
-from uuid import UUID
+from uuid import UUID, uuid4
 
 import pytest
 
-from todolist_hexagon.events import TaskOpened, Event, TodoListCreated
+from todolist_hexagon.events import TaskOpened, Event, TodoListCreated, TaskDescribed, TaskClosed, TaskAttached
 from todolist_hexagon.ports import AggregateEvent, EventStorePort
 
 NOW = datetime.now()
@@ -15,10 +15,14 @@ class BaseTestEventStore(ABC):
         sut = self._sut()
         assert sut.events_for(key=UUID("00000000-0000-0000-0000-000000000000")) == []
 
-    @pytest.mark.parametrize("event", [
-        [TaskOpened(when=datetime.now())],
+    @pytest.mark.parametrize("event_name, event", [
+        ["TaskOpened", TaskOpened(when=datetime.now())],
+        ["TaskDescribed", TaskDescribed(title="some title", description="some description", when=datetime.now())],
+        ["TaskClosed", TaskClosed(when=datetime.now())],
+        ["TodoListCreated", TodoListCreated(todolist_key=uuid4(), when=datetime.now())],
+        ["TaskAttached", TaskAttached(task_key=uuid4(), when=datetime.now())],
     ])
-    def test_give_event_when_event_saved(self, event: Event) -> None:
+    def test_give_event_when_event_saved(self, event_name: str, event: Event) -> None:
         sut = self._sut()
         aggregate_id = UUID(int=1)
         sut.save(AggregateEvent(key=aggregate_id, events=[event]))
