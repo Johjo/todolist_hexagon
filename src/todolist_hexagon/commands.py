@@ -24,10 +24,14 @@ class OpenTask(CommandBase):
     title: str
     description: str
 
+@dataclass(frozen=True)
+class AttachSubTask(CommandBase):
+    task_key: UUID
+
 
 @dataclass(frozen=True)
 class CloseTask(CommandBase):
     task_key: UUID
 
 
-TaskCommand = OpenTask | CloseTask
+TaskCommand = OpenTask | CloseTask | AttachSubTask

@@ -4,7 +4,8 @@ from uuid import UUID, uuid4
 
 import pytest
 
-from todolist_hexagon.events import TaskOpened, Event, TodoListCreated, TaskDescribed, TaskClosed, TaskAttached
+from todolist_hexagon.events import TaskOpened, Event, TodoListCreated, TaskDescribed, TaskClosed, TaskAttached, \
+    SubTaskAttached
 from todolist_hexagon.ports import AggregateEvent, EventStorePort
 
 NOW = datetime.now()
@@ -16,11 +17,12 @@ class BaseTestEventStore(ABC):
         assert sut.events_for(key=UUID("00000000-0000-0000-0000-000000000000")) == []
 
     @pytest.mark.parametrize("event_name, event", [
-        ["TaskOpened", TaskOpened(when=datetime.now())],
-        ["TaskDescribed", TaskDescribed(title="some title", description="some description", when=datetime.now())],
-        ["TaskClosed", TaskClosed(when=datetime.now())],
-        ["TodoListCreated", TodoListCreated(when=datetime.now())],
-        ["TaskAttached", TaskAttached(task_key=uuid4(), when=datetime.now())],
+        ["TaskOpened", TaskOpened(when=NOW)],
+        ["TaskDescribed", TaskDescribed(title="some title", description="some description", when=NOW)],
+        ["TaskClosed", TaskClosed(when=NOW)],
+        ["TodoListCreated", TodoListCreated(when=NOW)],
+        ["TaskAttached", TaskAttached(task_key=uuid4(), when=NOW)],
+        ["SubTaskAttached", SubTaskAttached(task_key=uuid4(), when=NOW)],
     ])
     def test_give_event_when_event_saved(self, event_name: str, event: Event) -> None:
         sut = self._sut()

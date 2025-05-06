@@ -30,8 +30,12 @@ class TaskDescribed(EventBase):
     title: str
     description: str
 
+@dataclass(frozen=True)
+class SubTaskAttached(EventBase):
+    task_key: UUID
 
-TaskEvent = TaskOpened |  TaskDescribed | TaskClosed
+
+TaskEvent = TaskOpened |  TaskDescribed | TaskClosed | SubTaskAttached
 TodolistEvent = TodoListCreated | TaskAttached
 Event = TodolistEvent | TaskEvent
 EventList = list[Event]

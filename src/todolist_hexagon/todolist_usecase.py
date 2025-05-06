@@ -3,8 +3,8 @@ from uuid import UUID
 
 from datetime_provider import DateTimeProviderPrimaryPort
 
-from todolist_hexagon.commands import CreateTodolist, AttachTask, OpenTask, CloseTask, TaskCommand
-from todolist_hexagon.events import TaskOpened, EventList, TaskDescribed, TaskClosed
+from todolist_hexagon.commands import CreateTodolist, AttachTask, OpenTask, CloseTask, TaskCommand, AttachSubTask
+from todolist_hexagon.events import TaskOpened, EventList, TaskDescribed, TaskClosed, SubTaskAttached
 from todolist_hexagon.ports import EventStorePort, AggregateEvent
 from todolist_hexagon.todolist_aggregate import Todolist
 
@@ -17,6 +17,10 @@ class Task:
 
             case CloseTask(when=when):
                 return [TaskClosed(when=when)]
+
+            case AttachSubTask(task_key=task_key, when=when):
+                return [SubTaskAttached(task_key=task_key, when=when)]
+
             case _:
                 raise NotImplementedError(command)
 
@@ -33,6 +37,10 @@ class TodolistUseCasePort(ABC):
 
     @abstractmethod
     def close_task(self, task_key: UUID) -> None:
+        pass
+
+    @abstractmethod
+    def open_sub_task(self, parent_task_key: UUID, children_task_key: UUID, title: str, description: str) -> None:
         pass
 
 
@@ -57,3 +65,9 @@ class TodolistUseCase(TodolistUseCasePort):
         when = self._datetime_provider.now()
         task_events = Task().decide(CloseTask(task_key=task_key, when=when))
         self.event_store.save(AggregateEvent(key=task_key, events=task_events))
+
+    def open_sub_task(self, parent_task_key: UUID, children_task_key: UUID, title: str, description: str) -> None:
+        when = self._datetime_provider.now()
+        children_task_events = Task().decide(OpenTask(task_key=children_task_key, title=title, description=description, when=when))
+        parent_task_events = Task().decide(AttachSubTask(task_key=children_task_key, when=when))
+        self.event_store.save(AggregateEvent(key=children_task_key, events=children_task_events), AggregateEvent(key=parent_task_key, events=parent_task_events))
