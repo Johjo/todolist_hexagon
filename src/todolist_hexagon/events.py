@@ -1,11 +1,8 @@
 from dataclasses import dataclass
-from datetime import datetime
 from uuid import UUID
 
+from todolist_hexagon.base.events import EventBase
 
-@dataclass(frozen=True)
-class EventBase:
-    when: datetime
 
 @dataclass(frozen=True, eq=True)
 class TodoListCreated(EventBase):
@@ -38,6 +35,5 @@ class SubTaskAttached(EventBase):
 TaskEvent = TaskOpened |  TaskDescribed | TaskClosed | SubTaskAttached
 TodolistEvent = TodoListCreated | TaskAttached
 Event = TodolistEvent | TaskEvent
-EventList = list[Event]
 
 

@@ -6,7 +6,7 @@ import pytest
 
 from todolist_hexagon.events import TaskOpened, Event, TodoListCreated, TaskDescribed, TaskClosed, TaskAttached, \
     SubTaskAttached
-from todolist_hexagon.ports import AggregateEvent, EventStorePort
+from todolist_hexagon.base.ports import AggregateEvent, EventStorePort
 
 NOW = datetime.now()
 
@@ -63,5 +63,5 @@ class BaseTestEventStore(ABC):
 
 
     @abstractmethod
-    def _sut(self) -> EventStorePort:
+    def _sut(self) -> EventStorePort[Event]:
         pass

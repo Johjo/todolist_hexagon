@@ -4,13 +4,14 @@ from uuid import UUID
 from datetime_provider import DateTimeProviderPrimaryPort
 
 from todolist_hexagon.commands import CreateTodolist, AttachTask, OpenTask, CloseTask, TaskCommand, AttachSubTask
-from todolist_hexagon.events import TaskOpened, EventList, TaskDescribed, TaskClosed, SubTaskAttached
-from todolist_hexagon.ports import EventStorePort, AggregateEvent
+from todolist_hexagon.events import TaskOpened, TaskDescribed, TaskClosed, SubTaskAttached, Event
+from todolist_hexagon.base.events import EventList
+from todolist_hexagon.base.ports import EventStorePort, AggregateEvent
 from todolist_hexagon.todolist_aggregate import Todolist
 
 
 class Task:
-    def decide(self, command: TaskCommand) -> EventList:
+    def decide(self, command: TaskCommand) -> EventList[Event]:
         match command:
             case OpenTask(title=title, description=description, when=when):
                 return [TaskDescribed(title=title, description=description, when=when), TaskOpened(when=when)]
@@ -45,7 +46,7 @@ class TodolistUseCasePort(ABC):
 
 
 class TodolistUseCase(TodolistUseCasePort):
-    def __init__(self, event_store: EventStorePort, datetime_provider: DateTimeProviderPrimaryPort) -> None:
+    def __init__(self, event_store: EventStorePort[Event], datetime_provider: DateTimeProviderPrimaryPort) -> None:
         self._datetime_provider = datetime_provider
         self.event_store = event_store
 
