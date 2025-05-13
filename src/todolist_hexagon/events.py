@@ -24,8 +24,8 @@ class TaskAttached(EventBase):
 
 @dataclass(frozen=True)
 class TaskDescribed(EventBase):
-    title: str
-    description: str
+    title: str | None = None
+    description: str | None = None
 
 @dataclass(frozen=True)
 class SubTaskAttached(EventBase):
