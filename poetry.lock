@@ -138,6 +138,25 @@ dev = ["pre-commit", "tox"]
 testing = ["pytest", "pytest-benchmark"]
 
 [[package]]
+name = "pyqure"
+version = "0.1.0"
+description = ""
+optional = false
+python-versions = ">=3.13"
+groups = ["main"]
+files = []
+develop = false
+
+[package.dependencies]
+pytest = ">=8.3.5,<9.0.0"
+
+[package.source]
+type = "git"
+url = "https://github.com/Johjo/pyqure"
+reference = "HEAD"
+resolved_reference = "5d2394460b87a763211c936aaa1cbe845fda0b53"
+
+[[package]]
 name = "pytest"
 version = "8.3.5"
 description = "pytest: simple powerful testing with Python"
@@ -173,4 +192,4 @@ files = [
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.13"
-content-hash = "fadb9d55fcabdcaae1dff75e785d758c2c37a320e08c2d2f837ffa7f12c69ea8"
+content-hash = "1754abbf8ce84dda6a2e42a5b77265dbe6973e74955ef2af5e7bfb4c0c917474"
