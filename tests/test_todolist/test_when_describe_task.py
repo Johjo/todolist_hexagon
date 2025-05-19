@@ -5,7 +5,8 @@ from todolist_hexagon.base.ports import AggregateEvent
 from todolist_hexagon.events import TaskOpened, TaskAttached, TaskDescribed
 from todolist_hexagon.result import Err
 from todolist_hexagon.secondary.event_store_in_memory import EventStoreInMemory
-from todolist_hexagon.todolist_usecase import TodolistUseCasePort, TaskNotFound
+from todolist_hexagon.todolist_usecase import TodolistUseCasePort
+from todolist_hexagon.task_error import TaskNotFound
 
 
 def test_title_described_when_describe_task_with_title(sut: TodolistUseCasePort, event_store: EventStoreInMemory) -> None:

@@ -3,7 +3,6 @@ from dataclasses import dataclass
 from typing import Generic
 from uuid import UUID
 
-from todolist_hexagon.events import Event
 from todolist_hexagon.base.events import EventList, ET
 
 
